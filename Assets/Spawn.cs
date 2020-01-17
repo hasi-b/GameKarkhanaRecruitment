@@ -14,7 +14,9 @@ public class Spawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(Enemy, SmoveSpots[SrandomSpot].position, Quaternion.identity);
         SrandomSpot = Random.Range(0, SmoveSpots.Length);
+        
     }
 
     // Update is called once per frame
