@@ -22,7 +22,8 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeBetwnSpawn <= 0 && count<5)
+       int dif= Mathf.Abs(collidor.score - count);
+        if (timeBetwnSpawn <= 0 && dif<5)
         {
             Instantiate(Enemy, SmoveSpots[SrandomSpot].position, Quaternion.identity);
             timeBetwnSpawn = startTimeBtwnSpawn;

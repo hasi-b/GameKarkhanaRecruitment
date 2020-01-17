@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            health = 0;
             Destroy(gameObject);
         }
     }
