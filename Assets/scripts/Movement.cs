@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Movement : MonoBehaviour
 {
@@ -25,6 +27,8 @@ public class Movement : MonoBehaviour
         {
             health = 0;
             Destroy(gameObject);
+
+            Application.Quit();
         }
     }
 
@@ -62,12 +66,21 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         float moove = Input.GetAxis("Horizontal");
+        float moovyy = Input.GetAxis("Vertical");
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
         rb.velocity = new Vector2(jumpspeed * moove, rb.velocity.y);
         if (Input.GetButtonDown("Jump"))
         {
             Debug.Log("Jumped");
-            rb.AddForce(new Vector2(rb.velocity.x, jumpforce));
+            if(moove ==0 && moovyy == 0)
+            {
+                rb.AddForce(new Vector2(0, 5 ) * 5, ForceMode2D.Impulse);
+            }
+            rb.AddForce(new Vector2(5*moove,5*moovyy)*5,ForceMode2D.Impulse);
+            
+
+
+            Debug.Log("excutedJumped");
         }
         if (health == 0)
         {
