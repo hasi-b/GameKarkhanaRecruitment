@@ -27,8 +27,8 @@ public class Movement : MonoBehaviour
         {
             health = 0;
             Destroy(gameObject);
-
-            Application.Quit();
+            
+            SceneManager.LoadScene("Basic");
         }
     }
 
@@ -59,7 +59,24 @@ public class Movement : MonoBehaviour
        
     }
 
-   
+   public void jump()
+    {
+        float moove = Input.GetAxis("Horizontal");
+        float moovyy = Input.GetAxis("Vertical");
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.velocity = new Vector2(jumpspeed * moove, rb.velocity.y);
+        
+            Debug.Log("Jumped");
+            if (moove == 0 && moovyy == 0)
+            {
+                rb.AddForce(new Vector2(0, 5) * 5, ForceMode2D.Impulse);
+            }
+            rb.AddForce(new Vector2(5 * moove, 5 * moovyy) * 5, ForceMode2D.Impulse);
+
+
+
+            Debug.Log("excutedJumped");
+        }
        
     
 
@@ -104,7 +121,7 @@ public class Movement : MonoBehaviour
         Vector2 shootingDirection = crosshair.transform.localPosition;
         shootingDirection.Normalize();
         
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire2"))
         {
            
              GameObject bullet = Instantiate(bulletprefabs, transform.position, Quaternion.identity);
